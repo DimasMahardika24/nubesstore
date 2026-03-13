@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nubes Store - Kalkulator Aesthetic</title>
+    <style>
+        :root {
+            --pink-primary: #ff69b4;
+            --pink-soft: #fce4ec;
+            --pink-light: #fff5f8;
+            --pink-dark: #d81b60;
+        }
+
+        body {
+            font-family: 'Quicksand', 'Segoe UI', sans-serif;
+            margin: 0;
+            background-color: var(--pink-soft);
+            background-image: radial-gradient(#f8bbd0 2px, transparent 2px);
+            background-size: 30px 30px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            color: #444;
+        }
+
+        /* --- LOGO CUSTOM DHIKZXCLOUD --- */
+        .logo-wrapper {
+            margin-top: 80px; 
+            margin-bottom: 25px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+        }
+
+        .maskot-custom {
+            width: 80px; 
+            height: 80px;
+            object-fit: cover;
+            position: absolute;
+            top: -65px; 
+            z-index: 10;
+            border-radius: 20px; 
+            border: 4px solid white;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+            background: white;
+        }
+
+        .logo-box {
+            background: white;
+            padding: 14px 45px;
+            border-radius: 50px;
+            font-weight: 800;
+            font-size: 24px;
+            color: var(--pink-primary);
+            box-shadow: 0 10px 25px rgba(255, 105, 180, 0.2);
+            border: 4px solid white;
+            z-index: 5;
+            letter-spacing: 2px;
+            margin-top: 10px;
+        }
+
+        /* --- CONTAINER --- */
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            width: 100%;
+            max-width: 700px;
+            border-radius: 30px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
+            border: 2px solid white;
+            box-sizing: border-box;
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            border-bottom: 2px solid #fdf2f8;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .tab {
+            padding: 10px 18px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: bold;
+            color: var(--pink-primary);
+            transition: 0.3s;
+            background: var(--pink-light);
+        }
+
+        .tab.active {
+            background: var(--pink-primary);
+            color: white;
+            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.3);
+        }
+
+        .section { display: none; width: 100%; }
+        .section.active { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
+        
+        @media (max-width: 650px) {
+            .section.active { grid-template-columns: 1fr; }
+            .maskot-custom { width: 70px; height: 70px; top: -55px; }
+        }
+
+        label { font-size: 11px; font-weight: 800; color: #aaa; text-transform: uppercase; margin-bottom: 6px; display: block; }
+        input {
+            width: 100%;
+            padding: 14px;
+            margin-bottom: 15px;
+            border-radius: 15px;
+            border: 2px solid #fce4ec;
+            background: #fffafa;
+            box-sizing: border-box;
+            outline: none;
+            font-size: 14px;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            background: var(--pink-primary);
+            color: white;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .result-box {
+            background: linear-gradient(135deg, #fff5f8 0%, #ffe4f0 100%);
+            border: 2px dashed #fbcfe8;
+            border-radius: 25px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .result-value { font-size: 26px; font-weight: 800; color: #333; margin: 10px 0; }
+
+        /* --- CALENDAR --- */
+        .calendar-grid { 
+            display: grid; 
+            grid-template-columns: repeat(7, 1fr); 
+            gap: 5px; 
+            background: white;
+            padding: 10px;
+            border-radius: 15px;
+        }
+        .calendar-header { 
+            font-weight: 800; 
+            font-size: 12px; 
+            color: var(--pink-primary); 
+            padding: 10px 0; 
+            text-align: center;
+        }
+        .day { 
+            padding: 10px 0; 
+            font-size: 13px; 
+            border-radius: 10px; 
+            color: #555; 
+            text-align: center;
+            border: 1px solid #fdf2f8;
+        }
+        .today { background: var(--pink-primary); color: white !important; font-weight: bold; }
+
+        /* --- FOOTER FIXED --- */
+        footer { 
+            margin-top: 40px; 
+            padding-bottom: 20px;
+            text-align: center;
+        }
+        .made-by {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--pink-dark);
+            letter-spacing: 1px;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="logo-wrapper">
+        <img src="https://img2.pixhost.to/images/6399/704112282_dhikzxcloud.png" alt="DhikzxCloud" class="maskot-custom">
+        <div class="logo-box">NUBES STORE</div>
+    </div>
+
+    <div class="container">
+        <div class="tabs">
+            <div class="tab active" onclick="openTab('refund',this)">Refund</div>
+            <div class="tab" onclick="openTab('hari',this)">Selisih Hari</div>
+            <div class="tab" onclick="openTab('tanggal',this)">Penanggalan</div>
+            <div class="tab" onclick="openTab('kalender',this)">Kalender</div>
+        </div>
+
+        <div class="section active" id="refund">
+            <div>
+                <label>Harga Beli</label>
+                <input type="number" id="harga" placeholder="Rp">
+                <label>Sisa Hari</label>
+                <input type="number" id="sisa">
+                <label>Total Hari</label>
+                <input type="number" id="durasi">
+                <label>Rate: <span id="rateVal">0.7</span></label>
+                <input type="range" min="0" max="1" step="0.1" value="0.7" id="rate" oninput="document.getElementById('rateVal').innerText = this.value">
+                <button onclick="hitungRefund()">Hitung</button>
+            </div>
+            <div class="result-box">
+                <span style="font-size: 10px; font-weight: 800; color: #f472b6;">ESTIMASI REFUND</span>
+                <div class="result-value" id="hasilRefund">Rp 0</div>
+            </div>
+        </div>
+
+        <div class="section" id="hari">
+            <div>
+                <label>Mulai</label>
+                <input type="date" id="mulai">
+                <label>Akhir</label>
+                <input type="date" id="akhir">
+                <button onclick="hitungHari()">Cek Selisih</button>
+            </div>
+            <div class="result-box">
+                <div class="result-value" id="hasilHari">0</div>
+                <span>Hari</span>
+            </div>
+        </div>
+
+        <div class="section" id="tanggal">
+            <label>Tanggal Pembelian</label>
+            <input type="date" id="tglAwal">
+            <label>Durasi (Hari)</label>
+            <input type="number" id="tambahHari">
+            <button onclick="penanggalan()">Cek Expired</button>
+            <div class="result-box" style="margin-top: 15px;">
+                <div class="result-value" id="hasilTanggal">-</div>
+            </div>
+        </div>
+
+        <div class="section" id="kalender">
+            <div id="monthName" style="text-align: center; font-weight: 800; color: var(--pink-primary); margin-bottom: 10px;"></div>
+            <div class="calendar-grid" id="calendar"></div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="made-by">Made By Nubes Store</div>
+    </footer>
+
+    <script>
+        function openTab(id, el){
+            document.querySelectorAll(".section").forEach(s => {
+                s.style.display = "none";
+                s.classList.remove("active");
+            });
+            const target = document.getElementById(id);
+            target.classList.add("active");
+            target.style.display = (id === 'kalender' || id === 'tanggal') ? "block" : "grid";
+
+            document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+            el.classList.add("active");
+            if(id === 'kalender') loadCalendar();
+        }
+
+        function hitungRefund(){
+            let h = Number(document.getElementById("harga").value);
+            let s = Number(document.getElementById("sisa").value);
+            let d = Number(document.getElementById("durasi").value);
+            let r = Number(document.getElementById("rate").value);
+            if(d > 0) {
+                let res = (h / d) * s * r;
+                document.getElementById("hasilRefund").innerText = "Rp " + Math.floor(res).toLocaleString('id-ID');
+            }
+        }
+
+        function hitungHari(){
+            let m = new Date(document.getElementById("mulai").value);
+            let a = new Date(document.getElementById("akhir").value);
+            if(!isNaN(m) && !isNaN(a)) {
+                let diff = Math.ceil((a - m) / (1000 * 60 * 60 * 24));
+                document.getElementById("hasilHari").innerText = diff;
+            }
+        }
+
+        function penanggalan(){
+            let t = new Date(document.getElementById("tglAwal").value);
+            let add = parseInt(document.getElementById("tambahHari").value);
+            if(!isNaN(t) && !isNaN(add)) {
+                t.setDate(t.getDate() + add);
+                document.getElementById("hasilTanggal").innerText = t.toLocaleDateString('id-ID', {day:'numeric', month:'long', year:'numeric'});
+            }
+        }
+
+        function loadCalendar(){
+            const cal = document.getElementById("calendar");
+            const mName = document.getElementById("monthName");
+            cal.innerHTML = "";
+            const now = new Date();
+            mName.innerText = now.toLocaleDateString('id-ID', { month: 'long', year: 'numeric' }).toUpperCase();
+
+            ['Min','Sen','Sel','Rab','Kam','Jum','Sab'].forEach(h => {
+                let div = document.createElement("div");
+                div.className = "calendar-header";
+                div.innerText = h;
+                cal.appendChild(div);
+            });
+
+            const first = new Date(now.getFullYear(), now.getMonth(), 1).getDay();
+            const last = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
+
+            for(let x=0; x<first; x++) cal.appendChild(document.createElement("div"));
+            for(let i=1; i<=last; i++){
+                let d = document.createElement("div");
+                d.className = "day";
+                d.innerText = i;
+                if(i === now.getDate()) d.classList.add("today");
+                cal.appendChild(d);
+            }
+        }
+    </script>
+</body>
+</html>
