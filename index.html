@@ -3,21 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nubes Store - Kalkulator Aesthetic</title>
+    <title>Nubes Store - Kalkulator Aesthetic V2</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
             --pink-primary: #ff69b4;
             --pink-soft: #fce4ec;
             --pink-light: #fff5f8;
             --pink-dark: #d81b60;
+            --wa-green: #25d366;
         }
 
         body {
             font-family: 'Quicksand', 'Segoe UI', sans-serif;
             margin: 0;
-            background-color: var(--pink-soft);
-            background-image: radial-gradient(#f8bbd0 2px, transparent 2px);
-            background-size: 30px 30px;
+            /* --- BACKGROUND UPDATED BY DIKA --- */
+            background-image: url('https://img2.pixhost.to/images/7416/718153640_dhikzxcloud.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -26,7 +31,7 @@
             color: #444;
         }
 
-        /* --- LOGO CUSTOM DHIKZXCLOUD --- */
+        /* --- LOGO CUSTOM --- */
         .logo-wrapper {
             margin-top: 80px; 
             margin-bottom: 25px;
@@ -64,13 +69,13 @@
 
         /* --- CONTAINER --- */
         .container {
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(15px);
             width: 100%;
             max-width: 700px;
             border-radius: 30px;
             padding: 30px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
             border: 2px solid white;
             box-sizing: border-box;
         }
@@ -110,7 +115,7 @@
             .maskot-custom { width: 70px; height: 70px; top: -55px; }
         }
 
-        label { font-size: 11px; font-weight: 800; color: #aaa; text-transform: uppercase; margin-bottom: 6px; display: block; }
+        label { font-size: 11px; font-weight: 800; color: #666; text-transform: uppercase; margin-bottom: 6px; display: block; }
         input {
             width: 100%;
             padding: 14px;
@@ -150,6 +155,39 @@
 
         .result-value { font-size: 26px; font-weight: 800; color: #333; margin: 10px 0; }
 
+        /* --- WHATSAPP FLOATING BUTTON --- */
+        .btn-wa {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            background-color: var(--wa-green);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            text-decoration: none;
+            transition: 0.3s;
+            animation: pulse 2s infinite;
+        }
+
+        .btn-wa:hover {
+            transform: scale(1.1);
+            background-color: #128c7e;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+
         /* --- CALENDAR --- */
         .calendar-grid { 
             display: grid; 
@@ -176,7 +214,6 @@
         }
         .today { background: var(--pink-primary); color: white !important; font-weight: bold; }
 
-        /* --- FOOTER FIXED --- */
         footer { 
             margin-top: 40px; 
             padding-bottom: 20px;
@@ -185,18 +222,22 @@
         .made-by {
             font-size: 14px;
             font-weight: 700;
-            color: var(--pink-dark);
+            color: white;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
             letter-spacing: 1px;
-            opacity: 0.7;
         }
     </style>
 </head>
 <body>
 
     <div class="logo-wrapper">
-        <img src="https://img2.pixhost.to/images/6399/704112282_dhikzxcloud.png" alt="DhikzxCloud" class="maskot-custom">
+        <img src="https://img2.pixhost.to/images/7416/718152801_dhikzxcloud.jpg" alt="Logo Store" class="maskot-custom">
         <div class="logo-box">NUBES STORE</div>
     </div>
+
+    <a href="https://wa.me/62895370270099" class="btn-wa" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
 
     <div class="container">
         <div class="tabs">
